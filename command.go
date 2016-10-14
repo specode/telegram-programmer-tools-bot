@@ -14,6 +14,12 @@ import (
 	"github.com/go-telegram-bot-api/telegram-bot-api"
 )
 
+const (
+	ErrInvaild           = "Invaild"
+	ErrEmptyParams       = "please input arg. eg: /md5 xxx"
+	ErrInvaildTimeParams = "time format wrong. Please input like 2016-01-02 19:00:01"
+)
+
 func handleCommand(id int64, msgId int, command string, args string) tgbotapi.Chattable {
 	log.Printf("[handleCommand] Command[%s] args: %v", command, args)
 
@@ -25,7 +31,7 @@ func handleCommand(id int64, msgId int, command string, args string) tgbotapi.Ch
 		reply = NewHelpMsg(id, msgId)
 	case "md5":
 		if len(args) == 0 {
-			reply = NewInvaildMsg(id, msgId, "please input arg.")
+			reply = NewInvaildMsg(id, msgId, ErrEmptyParams)
 			break
 		}
 
@@ -34,7 +40,7 @@ func handleCommand(id int64, msgId int, command string, args string) tgbotapi.Ch
 		reply = result
 	case "base64enc":
 		if len(args) == 0 {
-			reply = NewInvaildMsg(id, msgId, "please input arg.")
+			reply = NewInvaildMsg(id, msgId, ErrEmptyParams)
 			break
 		}
 		encoded := base64.StdEncoding.EncodeToString([]byte(args))
@@ -43,7 +49,7 @@ func handleCommand(id int64, msgId int, command string, args string) tgbotapi.Ch
 		reply = result
 	case "base64dec":
 		if len(args) == 0 {
-			reply = NewInvaildMsg(id, msgId, "please input arg.")
+			reply = NewInvaildMsg(id, msgId, ErrEmptyParams)
 			break
 		}
 		decoded, _ := base64.StdEncoding.DecodeString(args)
@@ -52,7 +58,7 @@ func handleCommand(id int64, msgId int, command string, args string) tgbotapi.Ch
 		reply = result
 	case "urlenc":
 		if len(args) == 0 {
-			reply = NewInvaildMsg(id, msgId, "please input arg.")
+			reply = NewInvaildMsg(id, msgId, ErrEmptyParams)
 			break
 		}
 
@@ -62,7 +68,7 @@ func handleCommand(id int64, msgId int, command string, args string) tgbotapi.Ch
 		reply = result
 	case "urldec":
 		if len(args) == 0 {
-			reply = NewInvaildMsg(id, msgId, "please input arg.")
+			reply = NewInvaildMsg(id, msgId, ErrEmptyParams)
 			break
 		}
 
@@ -72,7 +78,7 @@ func handleCommand(id int64, msgId int, command string, args string) tgbotapi.Ch
 		reply = result
 	case "htmlenc":
 		if len(args) == 0 {
-			reply = NewInvaildMsg(id, msgId, "please input arg.")
+			reply = NewInvaildMsg(id, msgId, ErrEmptyParams)
 			break
 		}
 
@@ -82,7 +88,7 @@ func handleCommand(id int64, msgId int, command string, args string) tgbotapi.Ch
 		reply = result
 	case "htmldec":
 		if len(args) == 0 {
-			reply = NewInvaildMsg(id, msgId, "please input arg.")
+			reply = NewInvaildMsg(id, msgId, ErrEmptyParams)
 			break
 		}
 
@@ -96,7 +102,7 @@ func handleCommand(id int64, msgId int, command string, args string) tgbotapi.Ch
 		if len(args) != 0 {
 			t, err = time.Parse("2006-01-02 15:04:05", args)
 			if err != nil {
-				reply = NewInvaildMsg(id, msgId, "time format wrong. Please input like 2016-01-02 19:00:01")
+				reply = NewInvaildMsg(id, msgId, ErrInvaildTimeParams)
 				break
 			}
 		}
@@ -108,7 +114,7 @@ func handleCommand(id int64, msgId int, command string, args string) tgbotapi.Ch
 		reply = result
 	case "timestamp2time":
 		if len(args) == 0 {
-			reply = NewInvaildMsg(id, msgId, "please input arg.")
+			reply = NewInvaildMsg(id, msgId, ErrEmptyParams)
 			break
 		}
 

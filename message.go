@@ -8,8 +8,6 @@ import (
 )
 
 var (
-	ErrInvaild = "Invaild"
-
 	MsgWelcome    string   = "Welcome, This is programmer tools, /help"
 	MsgHelpFormat string   = "Tools:\n\n%v"
 	MsgCommand    []string = []string{
